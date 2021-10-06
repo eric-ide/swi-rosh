@@ -54,6 +54,8 @@ attempt to call the Prolog defined trace interceptor.
                 *    LOAD INTO MODULE SYSTEM    *
                 ********************************/
 
+kourosh.
+
 :- '$set_source_module'(system).
 
 '$boot_message'(_Format, _Args) :-
@@ -536,7 +538,7 @@ ignore(_Goal).
 %
 %   Synonym for fail/0, providing a declarative reading.
 
-false :-
+not_kourosh :-
     fail.
 
 %!  catch(:Goal, +Catcher, :Recover)
