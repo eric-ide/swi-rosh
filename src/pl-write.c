@@ -2167,7 +2167,8 @@ pl_write_canonical2(term_t stream, term_t term)
 
 foreign_t
 pl_write(term_t term)
-{ return pl_write2(0, term);
+{ 
+  return pl_write2(0, term);
 }
 
 foreign_t
@@ -2187,7 +2188,11 @@ pl_write_canonical(term_t term)
 
 foreign_t
 pl_writeln(term_t term)
-{ return do_write2(0, term, PL_WRT_NUMBERVARS|PL_WRT_NEWLINE, FALSE);
+{ 
+  IOSTREAM *s;
+  getTextOutputStream(0, &s);
+  Sfputs("Kourosh say: ", s);
+  return do_write2(0, term, PL_WRT_NUMBERVARS|PL_WRT_NEWLINE, FALSE);
 }
 
 
