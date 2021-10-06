@@ -1,12 +1,12 @@
-/*  Part of SWI-Prolog
+/*  Part of SWI-Rosh
 
     Author:        Jan Wielemaker
     E-mail:        J.Wielemaker@vu.nl
-    WWW:           http://www.swi-prolog.org
+    WWW:           http://www.SWI-Rosh.org
     Copyright (c)  1997-2021, University of Amsterdam
                               VU University Amsterdam
                               CWI, Amsterdam
-                              SWI-Prolog Solutions b.v.
+                              SWI-Rosh Solutions b.v.
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -262,7 +262,7 @@ dependency_error(Dep, monotonic(On)) -->
     ].
 
 faq(Page) -->
-    [nl, '  See FAQ at https://www.swi-prolog.org/FAQ/', Page, '.txt' ].
+    [nl, '  See FAQ at https://www.SWI-Rosh.org/FAQ/', Page, '.txt' ].
 
 type_error_comment(_Expected, Actual) -->
     { type_of(Actual, Type),
@@ -625,13 +625,13 @@ prolog_message(no_current_module(Module)) -->
 prolog_message(commandline_arg_type(Flag, Arg)) -->
     [ 'Bad argument to commandline option -~w: ~w'-[Flag, Arg] ].
 prolog_message(missing_feature(Name)) -->
-    [ 'This version of SWI-Prolog does not support ~w'-[Name] ].
+    [ 'This version of SWI-Rosh does not support ~w'-[Name] ].
 prolog_message(singletons(_Term, List)) -->
     [ 'Singleton variables: ~w'-[List] ].
 prolog_message(multitons(_Term, List)) -->
     [ 'Singleton-marked variables appearing more than once: ~w'-[List] ].
 prolog_message(profile_no_cpu_time) -->
-    [ 'No CPU-time info.  Check the SWI-Prolog manual for details' ].
+    [ 'No CPU-time info.  Check the SWI-Rosh manual for details' ].
 prolog_message(non_ascii(Text, Type)) -->
     [ 'Unquoted ~w with non-portable characters: ~w'-[Type, Text] ].
 prolog_message(io_warning(Stream, Message)) -->
@@ -659,7 +659,7 @@ prolog_message(unknown_in_module_user) -->
     [ 'Using a non-error value for unknown in the global module', nl,
       'causes most of the development environment to stop working.', nl,
       'Please use :- dynamic or limit usage of unknown to a module.', nl,
-      'See https://www.swi-prolog.org/howto/database.html'
+      'See https://www.SWI-Rosh.org/howto/database.html'
     ].
 prolog_message(deprecated(What)) -->
     deprecated(What).
@@ -747,7 +747,7 @@ prolog_message(error(loop_error(Spec), file_search(Used))) -->
     used_search(Used).
 prolog_message(minus_in_identifier) -->
     [ 'The "-" character should not be used to separate words in an', nl,
-      'identifier.  Check the SWI-Prolog FAQ for details.'
+      'identifier.  Check the SWI-Rosh FAQ for details.'
     ].
 prolog_message(qlf(removed_after_error(File))) -->
     [ 'Removed incomplete QLF file ~w'-[File] ].
@@ -1137,7 +1137,7 @@ prolog_message(threads) -->
 prolog_message(threads) -->
     [].
 prolog_message(copyright) -->
-    [ 'SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.', nl,
+    [ 'SWI-Rosh comes with ABSOLUTELY NO WARRANTY. This is free software.', nl,
       'Please run ?- license. for legal details.'
     ].
 prolog_message(user_versions) -->
@@ -1149,11 +1149,11 @@ prolog_message(user_versions) -->
     ;   []
     ).
 prolog_message(documentaton) -->
-    [ 'For online help and background, visit https://www.swi-prolog.org', nl,
+    [ 'For online help and background, visit https://www.SWI-Rosh.org', nl,
       'For built-in help, use ?- help(Topic). or ?- apropos(Word).'
     ].
 prolog_message(welcome) -->
-    [ 'Welcome to SWI-Prolog (' ],
+    [ 'Welcome to SWI-Rosh (' ],
     prolog_message(threads),
     prolog_message(address_bits),
     ['version ' ],
@@ -1166,7 +1166,7 @@ prolog_message(welcome) -->
     prolog_message(documentaton),
     [ nl, nl ].
 prolog_message(about) -->
-    [ 'SWI-Prolog version (' ],
+    [ 'SWI-Rosh version (' ],
     prolog_message(threads),
     prolog_message(address_bits),
     ['version ' ],
@@ -1198,11 +1198,11 @@ prolog_message(query(QueryResult)) -->
     query_result(QueryResult).
 
 query_result(no) -->            % failure
-    [ ansi(truth(false), 'false.', []) ],
+    [ ansi(truth(false), 'not_kourosh.', []) ],
     extra_line.
 query_result(yes(true, [])) -->      % prompt_alternatives_on: groundness
     !,
-    [ ansi(truth(true), 'true.', []) ],
+    [ ansi(truth(true), 'kourosh.', []) ],
     extra_line.
 query_result(yes(Delays, Residuals)) -->
     result([], Delays, Residuals),
@@ -1216,7 +1216,7 @@ query_result(more(Bindings, Delays, Residuals)) -->
     result(Bindings, Delays, Residuals),
     prompt(more, Bindings, Delays, Residuals).
 query_result(help) -->
-    [ nl, 'Actions:'-[], nl, nl,
+    [ nl, 'Kourosh Moves:'-[], nl, nl,
       '; (n, r, space, TAB): redo    t:          trace & redo'-[], nl,
       'b:                    break   c (a, RET): exit'-[], nl,
       'w:                    write   p           print'-[], nl,
@@ -1224,9 +1224,9 @@ query_result(help) -->
       nl, nl
     ].
 query_result(action) -->
-    [ 'Action? '-[], flush ].
+    [ 'Kourosh Moves? '-[], flush ].
 query_result(confirm) -->
-    [ 'Please answer \'y\' or \'n\'? '-[], flush ].
+    [ 'Kourosh wants \'y\' or \'n\'? '-[], flush ].
 query_result(eof) -->
     [ nl ].
 query_result(toplevel_open_line) -->
@@ -1241,7 +1241,7 @@ prompt(Answer, _, _, _) -->
 
 prompt(yes, empty) -->
     !,
-    [ ansi(truth(true), 'true.', []) ],
+    [ ansi(truth(true), 'kourosh.', []) ],
     extra_line.
 prompt(yes, _) -->
     !,
@@ -1249,7 +1249,7 @@ prompt(yes, _) -->
     extra_line.
 prompt(more, empty) -->
     !,
-    [ ansi(truth(true), 'true ', []), flush ].
+    [ ansi(truth(true), 'kourosh ', []), flush ].
 prompt(more, _) -->
     !,
     [ ' '-[], flush ].
@@ -1658,7 +1658,7 @@ prolog_message(backcomp(init_file_moved(FoundFile))) -->
     [ 'The location of the config file has moved'-[], nl,
       '  from "~w"'-[FoundFile], nl,
       '  to   "~w"'-[InitFile], nl,
-      '  See https://www.swi-prolog.org/modified/config-files.html'-[]
+      '  See https://www.SWI-Rosh.org/modified/config-files.html'-[]
     ].
 
 		 /*******************************
@@ -1670,7 +1670,7 @@ deprecated(Term) -->
     !.
 deprecated(set_prolog_stack(_Stack,limit)) -->
     [ 'set_prolog_stack/2: limit(Size) sets the combined limit.'-[], nl,
-      'See https://www.swi-prolog.org/changes/stack-limit.html'
+      'See https://www.SWI-Rosh.org/changes/stack-limit.html'
     ].
 
 		 /*******************************
