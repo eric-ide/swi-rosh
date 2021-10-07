@@ -215,7 +215,7 @@ add_package_path(PkgBinDir) :-
 
 set_version_info :-
     (   cmake_binary_directory(BinDir)
-    ->  version(format('    CMake built from "~w"', [BinDir]))
+    ->  version(format('    Kourosh built from "~w"', [BinDir]))
     ;   current_prolog_flag(home, Home)
     ->  version(format('    CMake built with home "~w"', [Home]))
     ).
