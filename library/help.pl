@@ -130,9 +130,11 @@ By default the result of  help/1  is   sent  through  a  _pager_ such as
 %   @see apropos/1 for searching the manual names and summaries.
 
 help :-
+    write('Kourosh is thinking...\n'),
     notrace(show_matches([help/1, apropos/1], exact-help)).
 
 help(What) :-
+    write('Kourosh is thinking...\n'),
     notrace(help_no_trace(What)).
 
 help_no_trace(What) :-
@@ -145,7 +147,10 @@ help_no_trace(What) :-
 show_matches(Matches, HowWhat) :-
     help_html(Matches, HowWhat, HTML),
     !,
-    show_html(HTML).
+    string_concat(
+        "<h1> -----------------------+| KOUROSH EXPLAINS |+-----------------------</h1>", 
+        HTML, KouroshedHTML),
+    show_html(KouroshedHTML).
 
 %!  show_html_hook(+HTML:string) is semidet.
 %
@@ -367,6 +372,7 @@ running_under_emacs :-
 %	quality of the match.
 
 apropos(Query) :-
+    write('Kourosh is thinking...\n'),
     notrace(apropos_no_trace(Query)).
 
 apropos_no_trace(Query) :-
@@ -381,6 +387,7 @@ apropos_no_trace(Query) :-
         ;   Truncated = Sorted
         ),
         pairs_values(Truncated, Matches),
+        write("Kourosh Reckons:\n"),
         print_message(information, help(apropos_matches(Matches, Len)))
     ).
 

@@ -1179,7 +1179,7 @@ prolog_message(user_versions) -->
     ).
 prolog_message(documentaton) -->
     [ 'For spiritual help, consult Kourosh or one of the tutors', nl,
-      'For built-in help, use ?- help(Topic). or ?- apropos(Word).'
+      'For built-in help, use ?- kourosh_explain(Topic). or ?- help_me_kourosh(Word).'
     ].
 prolog_message(welcome) -->
     [ 'Welcome to SWI-Rosh (' ],

@@ -56,6 +56,11 @@ attempt to call the Prolog defined trace interceptor.
 
 kourosh.
 
+kourosh_explain(What) :- help(What).
+kourosh_explain :- help.
+
+help_me_kourosh(Query) :- apropos(Query).
+
 :- '$set_source_module'(system).
 
 '$boot_message'(_Format, _Args) :-
