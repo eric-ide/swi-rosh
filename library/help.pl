@@ -481,7 +481,7 @@ object_class(_M:_Name//_Arity, dcg).
 
 prolog:message(help(not_found(What))) -->
     [ 'No help for ~p.'-[What], nl,
-      'Use ?- apropos(query). to search for candidates.'-[]
+      'Use ?- help_me_kourosh(query). to search for candidates.'-[]
     ].
 prolog:message(help(no_apropos_match(Query))) -->
     [ 'No matches for ~p'-[Query] ].
@@ -495,10 +495,10 @@ prolog:message(help(apropos_matches(Pairs, Total))) -->
     ->  []
     ;   [ nl,
           ansi(fg(red), 'Showing ~D of ~D matches', [Count,Total]), nl, nl,
-          'Use ?- apropos(Type:Query) or multiple words in Query '-[], nl,
+          'Use ?- help_me_kourosh(Type:Query) or multiple words in Query '-[], nl,
           'to restrict your search.  For example:'-[], nl, nl,
-          '  ?- apropos(iso:open).'-[], nl,
-          '  ?- apropos(\'open file\').'-[]
+          '  ?- help_me_kourosh(iso:open).'-[], nl,
+          '  ?- help_me_kourosh(\'open file\').'-[]
         ]
     ).
 
