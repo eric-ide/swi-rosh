@@ -55,11 +55,20 @@ attempt to call the Prolog defined trace interceptor.
                 ********************************/
 
 kourosh.
+ 
+no_help_message :- ansi_format([bold,fg(red)], '~w', ["Help documentation isn't available in this build.\n"]), 
+                   ansi_format([bold,fg(yellow)], '~w', ["Go ask a tutor or something.\n"]),	
+                   write("Contact the developers if you want a build with help enabled.\n"),
+		   ansi_format([bold,bg(blue),fg(magenta)], '~w', ["\nMay Kourosh grant us a way to install libtcmalloc_minimal.so.4 on the lab machines..."]).
 
-kourosh_explain(What) :- help(What).
-kourosh_explain :- help.
+kourosh_explain(What) :- current_predicate(help/1), help(What).
+kourosh_explain(What) :- no_help_message.
 
-help_me_kourosh(Query) :- apropos(Query).
+kourosh_explain :- current_predicate(help/1), help.
+kourosh_explain :- no_help_message.
+
+help_me_kourosh(Query) :- current_predicate(help/1), apropos(Query).
+help_me_kourosh(Query) :- no_help_message.
 
 :- '$set_source_module'(system).
 
