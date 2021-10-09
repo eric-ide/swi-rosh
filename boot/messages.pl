@@ -1885,8 +1885,8 @@ msg_property(query, stream(user_output)) :- !.
 msg_property(_, stream(user_error)) :- !.
 msg_property(error,
              location_prefix(File:Line,
-                             '~NERROR: ~w:~d:'-[File,Line],
-                             '~NERROR:    ')) :- !.
+                             '~NDISSAPOINTED KOUROSH: ~w:~d:'-[File,Line],
+                             '~NDISSAPOINTED KOUROSH:    ')) :- !.
 msg_property(warning,
              location_prefix(File:Line,
                              '~NWarning: ~w:~d:'-[File,Line],
@@ -1898,7 +1898,7 @@ msg_prefix(debug(_), Prefix) :-
 msg_prefix(warning, Prefix) :-
     msg_context('~NWarning: ', Prefix).
 msg_prefix(error, Prefix) :-
-    msg_context('~NERROR: ', Prefix).
+    msg_context('~NDISSAPOINTED KOUROSH: ', Prefix).
 msg_prefix(informational, '~N% ').
 msg_prefix(information,   '~N% ').
 
