@@ -1315,10 +1315,10 @@ bindings([binding(Names,Skel,Subst)|T], Options) -->
 
 var_names([Name]) -->
     !,
-    [ '~w = '-[Name] ].
+    [ 'Kourosh reckons: ~w = '-[Name] ].
 var_names([Name1,Name2|T]) -->
     !,
-    [ '~w = ~w, '-[Name1, Name2] ],
+    [ 'Kourosh reckons: ~w = ~w, '-[Name1, Name2] ],
     var_names([Name2|T]).
 
 
