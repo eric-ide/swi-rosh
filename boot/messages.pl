@@ -1208,7 +1208,7 @@ prolog_message(about) -->
     [ ')', nl ],
     prolog_message(copyright).
 prolog_message(halt) -->
-    [ 'halt' ].
+    [ 'Kourosh Out' ].
 prolog_message(break(begin, Level)) -->
     [ 'Break level ~d'-[Level] ].
 prolog_message(break(end, Level)) -->
@@ -1428,7 +1428,7 @@ prolog_message(if_tty(Message)) -->
     ;   []
     ).
 prolog_message(halt(Reason)) -->
-    [ '~w: halt'-[Reason] ].
+    [ '~w: Kourosh Out'-[Reason] ].
 prolog_message(no_action(Char)) -->
     [ 'Unknown action: ~c (h for help)'-[Char], nl ].
 
