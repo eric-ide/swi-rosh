@@ -419,7 +419,6 @@ bool		aliasThread(int tid, atom_t type, atom_t name);
 word		pl_thread_create(term_t goal, term_t id,
 				 term_t options);
 word		pl_thread_exit(term_t retcode);
-foreign_t	pl_thread_signal(term_t thread, term_t goal);
 
 foreign_t	pl_thread_at_exit(term_t goal);
 int		PL_thread_self(void);
@@ -560,6 +559,7 @@ typedef struct
 #define	cgc_thread_stats(stats)		LDFUNC(cgc_thread_stats, stats)
 #define	isSignalledGCThread(sig)	LDFUNC(isSignalledGCThread, sig)
 #define	ThreadCPUTime(which)		LDFUNC(ThreadCPUTime, which)
+#define updatePendingThreadSignals(_)	LDFUNC(updatePendingThreadSignals, _)
 #endif /*USE_LD_MACROS*/
 
 #define LDFUNC_DECLARATIONS
@@ -581,6 +581,7 @@ int		cgc_thread_stats(cgc_stats *stats);
 int		signalGCThread(int sig);
 int		isSignalledGCThread(int sig);
 double	        ThreadCPUTime(int which);
+void		updatePendingThreadSignals(void);
 
 #undef LDFUNC_DECLARATIONS
 

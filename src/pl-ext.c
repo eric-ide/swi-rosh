@@ -203,7 +203,6 @@ static const PL_extension foreigns[] = {
 #ifdef O_PLMT
   FRG("thread_create",		3, pl_thread_create,	 META|ISO),
   FRG("thread_exit",		1, pl_thread_exit,		0),
-  FRG("thread_signal",		2, pl_thread_signal,	 META|ISO),
   FRG("open_xterm",		5, pl_open_xterm,		0),
 #endif
 
@@ -348,6 +347,7 @@ registerBuiltins(const PL_extension *f)
       if ( f->flags & PL_FA_VARARGS )	       set(def, P_VARARG);
       if ( f->flags & PL_FA_CREF )	       set(def, P_FOREIGN_CREF);
       if ( f->flags & PL_FA_ISO )	       set(def, P_ISO);
+      if ( f->flags & PL_FA_SIG_ATOMIC )       set(def, P_SIG_ATOMIC);
 
       def->impl.foreign.function = f->function;
       createForeignSupervisor(def, f->function);
@@ -562,7 +562,7 @@ initBuildIns(void)
   PL_meta_predicate(PL_predicate("prolog_listen",    3, "system"), "+:+");
   PL_meta_predicate(PL_predicate("prolog_unlisten",  2, "system"), "+:");
   PL_meta_predicate(PL_predicate("with_tty_raw",     1, "system"), "0");
-  PL_meta_predicate(PL_predicate("$sig_atomic",      1, "system"), "0");
+  PL_meta_predicate(PL_predicate("sig_atomic",       1, "system"), "0");
 
   for( ecell = ext_head; ecell; ecell = ecell->next )
     bindExtensions(ecell->module, ecell->extensions);
