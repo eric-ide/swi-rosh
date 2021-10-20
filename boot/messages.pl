@@ -1294,7 +1294,9 @@ result(Bindings, Delays, Residuals) -->
       GOptions = [priority(999)|Options0]
     },
     wfs_residual_program(Delays, GOptions),
-    ["KOUROSH RECKONS:", nl],
+    (
+        {Bindings == []} -> []; ["KOUROSH RECKONS:", nl]
+    ),
     bindings(Bindings, [priority(699)|Options]),
     (   {Residuals == []-[]}
     ->  bind_delays_sep(Bindings, Delays),
