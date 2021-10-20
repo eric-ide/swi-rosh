@@ -495,12 +495,22 @@ PL_discard_foreign_frame(fid_t id)
 }
 
 
-#define determinism_error(fr, found) LDFUNC(determinism_error, fr, found)
+#define determinism_error(fr, bfr, found) \
+	LDFUNC(determinism_error, fr, bfr, found)
+
 static int
-determinism_error(DECL_LD LocalFrame fr, atom_t found)
+determinism_error(DECL_LD LocalFrame fr, Choice bfr, atom_t found)
 { fid_t fid;
   int rc = FALSE;
   atom_t a = ATOM_error;
+
+  if ( found == ATOM_nondet )
+  { for(; bfr && bfr->type == CHP_DEBUG; bfr=bfr->parent)
+      ;
+
+    if ( (void*)bfr < (void*)fr )
+      return TRUE;
+  }
 
   PL_current_prolog_flag(ATOM_determinism_error, PL_ATOM, &a);
   if ( a == ATOM_silent )
@@ -573,7 +583,7 @@ ssu_or_det_failed(DECL_LD LocalFrame fr)
   int rc = FALSE;
 
   if ( false(fr, FR_SSU_DET) )
-    return determinism_error(fr, ATOM_fail);
+    return determinism_error(fr, NULL, ATOM_fail);
 
   if ( (fid = PL_open_foreign_frame()) )
   { term_t goal;
@@ -1814,6 +1824,10 @@ resumeAfterException(int clear, Stack outofstack)
 
   LD->exception.processing = FALSE;
   LD->outofstack = NULL;
+
+#ifdef O_PLMT
+  updatePendingThreadSignals();
+#endif
 }
 
 
@@ -2129,9 +2143,11 @@ exception_hook(DECL_LD qid_t pqid, term_t fr, term_t catchfr_ref)
       { PL_put_frame(av+3, NULL);	/* puts 'none' */
       }
 
+      startCritical;
       qid = PL_open_query(MODULE_user, PL_Q_NODEBUG|PL_Q_CATCH_EXCEPTION,
 			  PROCEDURE_exception_hook4, av);
       rc = PL_next_solution(qid);
+      rc = endCritical && rc;
       debug = debugstatus.debugging;
       trace = debugstatus.tracing;
       if ( rc )				/* pass user setting trace/debug */
