@@ -1294,6 +1294,7 @@ result(Bindings, Delays, Residuals) -->
       GOptions = [priority(999)|Options0]
     },
     wfs_residual_program(Delays, GOptions),
+    ["KOUROSH RECKONS:", nl],
     bindings(Bindings, [priority(699)|Options]),
     (   {Residuals == []-[]}
     ->  bind_delays_sep(Bindings, Delays),
@@ -1320,10 +1321,10 @@ bindings([binding(Names,Skel,Subst)|T], Options) -->
 
 var_names([Name]) -->
     !,
-    [ 'Kourosh reckons: ~w = '-[Name] ].
+    [ '~w = '-[Name] ].
 var_names([Name1,Name2|T]) -->
     !,
-    [ 'Kourosh reckons: ~w = ~w, '-[Name1, Name2] ],
+    [ '~w = ~w, '-[Name1, Name2] ],
     var_names([Name2|T]).
 
 
