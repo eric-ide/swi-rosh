@@ -2,6 +2,8 @@
 
 The same comprehensive free Prolog environment as SWI-Prolog, made better by Kourosh.
 
+![alt text](swi-kourosh.png)
+
 ## Forking, cloning and submitting patches
 
 This repository uses many [Git
